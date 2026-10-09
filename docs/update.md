@@ -2,13 +2,7 @@
 
 ![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](/img/docs/flarum-2.0-header.png)
 
-:::warning
-
-Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production. It isn't the final stable release yet, so back up your database and test on a staging copy before upgrading a live forum.
-
-:::
-
-This guide walks you through upgrading from Flarum v1 to v2. You'll need [Composer](https://getcomposer.org) — if you're not familiar with it, read [our guide](composer.md) first.
+This guide walks you through upgrading from Flarum v1 to v2. You'll need [Composer](https://getcomposer.org) - if you're not familiar with it, read [our guide](composer.md) first.
 
 :::danger Run this upgrade with Composer, not the extension manager
 
@@ -70,7 +64,7 @@ Flarum 2.0 still supports older databases, but releases such as **MySQL 5.7** an
 **3. Check for incompatible or superseded extensions.**
 Some extensions are no longer compatible with v2, and some have been superseded:
 
-- **Remove** `blomstra/database-queue` and `blomstra/fontawesome` — this functionality is now built into `flarum/core`.
+- **Remove** `blomstra/database-queue` and `blomstra/fontawesome` - this functionality is now built into `flarum/core`.
 - **Replace** `blomstra/flarum-redis` with `fof/redis`, and `blomstra/horizon` with `fof/horizon`.
 - **Replace** `flarum/package-manager` with `flarum/extension-manager`. The package was renamed for v2; the old name still resolves, but Composer will warn on every run that it is abandoned.
 - For all other extensions, check their [Discuss thread](https://discuss.flarum.org/t/extensions) or [Packagist](http://packagist.org/) page to confirm a v2-compatible release is available. You'll need to remove any that don't have one yet. Please be patient with extension developers!
@@ -84,20 +78,7 @@ Set the version string of all extensions (including bundled ones like `flarum/ta
 "flarum/mentions": "*",
 ```
 
-**5. Set `minimum-stability` to `beta`.**
-Until Flarum 2.0 reaches its final stable release, your `composer.json` must allow pre-stable versions:
-
-```json
-"minimum-stability": "beta"
-```
-
-:::info
-
-Once Flarum 2.0 stable is released, you should change this back to `stable`. Leaving it as `beta` after that point can cause Composer to pull in unstable versions of packages unexpectedly.
-
-:::
-
-**6. Update your `config.php` if using MariaDB.**
+**5. Update your `config.php` if using MariaDB.**
 Flarum 2.0 distinguishes between MySQL and MariaDB. If your forum runs on MariaDB, you must change the `driver` value in `config.php` to `mariadb`. Leaving it as `mysql` will cause compatibility errors once you are on 2.0.
 
 :::tip Not sure which one you have?
@@ -126,10 +107,10 @@ That forum is on MariaDB and does need this change, despite what the label says.
     'port' => 3306,
 ```
 
-**7. Check any local extenders.**
+**6. Check any local extenders.**
 If your install uses [local extenders](extenders.md), review them for compatibility with Flarum 2.0's API changes before upgrading.
 
-**8. Disable third-party extensions.**
+**7. Disable third-party extensions.**
 We recommend disabling third-party extensions in the admin dashboard before running the upgrade. This isn't strictly required, but makes debugging easier if something goes wrong. Re-enable them once the upgrade has finished and the forum loads.
 
 ## Running the Upgrade
